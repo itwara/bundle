@@ -14,9 +14,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: { //配置入口文件，有几个写几个
-        index: './src/js/page/index.js',
-        list: './src/js/page/list.js',
-        about: './src/js/page/about.js',
+        index: path.resolve(__dirname + '/src/js/index.js'),
+        list: path.resolve(__dirname + '/src/js/list.js'),
+        about: path.resolve(__dirname + '/src/js/about.js'),
     },
     output: { 
         path: path.join(__dirname, 'dist'), //输出目录的配置，模板、样式、脚本、图片等资源的路径配置都相对于它
@@ -39,8 +39,8 @@ module.exports = {
             }, {
                 //html模板加载器，可以处理引用的静态资源，默认配置参数attrs=img:src，处理图片的src引用的资源
                 //比如你配置，attrs=img:src img:data-src就可以一并处理data-src引用的资源了，就像下面这样
-                test: /\.html$/,
-                loader: "html?attrs=img:src img:data-src"
+                // test: /\.html$/,
+                // loader: "html-loader?attrs=img:src img:data-src"
             }, {
                 //文件加载器，处理文件静态资源
                 test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -66,9 +66,9 @@ module.exports = {
         
         //HtmlWebpackPlugin，模板生成相关的配置，每个对于一个页面的配置，有几个写几个
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
-            favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-            filename: './view/index.html', //生成的html存放路径，相对于path
-            template: './src/view/index.html', //html模板路径
+            favicon: path.resolve(__dirname + '/src/img/favicon.ico'), //favicon路径，通过webpack引入同时可以生成hash值
+            filename: path.resolve(__dirname + '/dist/index.html'), //生成的html存放路径，相对于path
+            template: path.resolve(__dirname + '/src/view/index.html'), //html模板路径
             inject: 'body', //js插入的位置，true/'head'/'body'/false
             hash: true, //为静态资源生成hash值
             chunks: ['vendors', 'index'],//需要引入的chunk，不配置就会引入所有页面的资源
@@ -77,39 +77,39 @@ module.exports = {
                 collapseWhitespace: false //删除空白符与换行符
             }
         }),
-        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
-            favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-            filename: './view/list.html', //生成的html存放路径，相对于path
-            template: './src/view/list.html', //html模板路径
-            inject: true, //js插入的位置，true/'head'/'body'/false
-            hash: true, //为静态资源生成hash值
-            chunks: ['vendors', 'list'],//需要引入的chunk，不配置就会引入所有页面的资源
-            minify: { //压缩HTML文件    
-                removeComments: true, //移除HTML中的注释
-                collapseWhitespace: false //删除空白符与换行符
-            }
-        }),
-        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
-            favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-            filename: './view/about.html', //生成的html存放路径，相对于path
-            template: './src/view/about.html', //html模板路径
-            inject: true, //js插入的位置，true/'head'/'body'/false
-            hash: true, //为静态资源生成hash值
-            chunks: ['vendors', 'about'],//需要引入的chunk，不配置就会引入所有页面的资源
-            minify: { //压缩HTML文件    
-                removeComments: true, //移除HTML中的注释
-                collapseWhitespace: false //删除空白符与换行符
-            }
-        }),
+        // new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+        //     favicon: path.resolve(__dirname + '/src/img/favicon.ico'), //favicon路径，通过webpack引入同时可以生成hash值
+        //     filename: path.resolve(__dirname + '/dist/list.html'), //生成的html存放路径，相对于path
+        //     template: path.resolve(__dirname + '/src/view/list.html'), //html模板路径
+        //     inject: true, //js插入的位置，true/'head'/'body'/false
+        //     hash: true, //为静态资源生成hash值
+        //     chunks: ['vendors', 'list'],//需要引入的chunk，不配置就会引入所有页面的资源
+        //     minify: { //压缩HTML文件    
+        //         removeComments: true, //移除HTML中的注释
+        //         collapseWhitespace: false //删除空白符与换行符
+        //     }
+        // }),
+        // new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+        //     favicon: path.resolve(__dirname + '/src/img/favicon.ico'), //favicon路径，通过webpack引入同时可以生成hash值
+        //     filename: path.resolve(__dirname + '/dist/about.html'), //生成的html存放路径，相对于path
+        //     template: path.resolve(__dirname + '/src/view/about.html'), //html模板路径
+        //     inject: true, //js插入的位置，true/'head'/'body'/false
+        //     hash: true, //为静态资源生成hash值
+        //     chunks: ['vendors', 'about'],//需要引入的chunk，不配置就会引入所有页面的资源
+        //     minify: { //压缩HTML文件    
+        //         removeComments: true, //移除HTML中的注释
+        //         collapseWhitespace: false //删除空白符与换行符
+        //     }
+        // }),
 
         new webpack.HotModuleReplacementPlugin() //热加载
     ],
     //使用webpack-dev-server，提高开发效率
-    devServer: {
-        contentBase: './',
-        host: 'localhost',
-        port: 9090, //默认8080
-        inline: true, //可以监控js变化
-        hot: true, //热启动
-    }
+    // devServer: {
+    //     contentBase: './',
+    //     host: 'localhost',
+    //     port: 9090, //默认8080
+    //     inline: true, //可以监控js变化
+    //     hot: true, //热启动
+    // }
 };
