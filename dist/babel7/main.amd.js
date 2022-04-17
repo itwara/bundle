@@ -11,6 +11,10 @@ define(['exports'], (function (exports) { 'use strict';
      * @return {Number}    the sum of all the array values
      */
     var addArray = function addArray(arr) {
+      if (arr === void 0) {
+        arr = [];
+      }
+
       var result = arr.reduce(function (a, b) {
         return a + b;
       }, 0);

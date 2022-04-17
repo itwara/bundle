@@ -16,6 +16,10 @@ System.register('bundle', [], (function (exports) {
              * @return {Number}    the sum of all the array values
              */
             var addArray = exports('addArray', function addArray(arr) {
+              if (arr === void 0) {
+                arr = [];
+              }
+
               var result = arr.reduce(function (a, b) {
                 return a + b;
               }, 0);
