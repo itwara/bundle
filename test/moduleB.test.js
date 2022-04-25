@@ -3,7 +3,7 @@ import moduleB from '../src/js/moduleB.js'
 
 describe('moduleB', () => {
     it('没有参数，输出正常', () => {
-       assert.strictEqual(moduleB(), '')
+       assert.strictEqual(moduleB(), 0)
     })
     it('有输入参数，输出正常', () => {
        assert.strictEqual(moduleB([1, 2]), 3)
