@@ -2,7 +2,7 @@
   "name": "bundle-rollup",
   "version": "1.0.0",
   "description": "rollup bundle demo",
-  "type":"module",
+  "type": "module",
   "directories": {
     "test": "test"
   },

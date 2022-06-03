@@ -42,6 +42,7 @@ export default {
     ],
     plugins: [
         babelPlugin({
+            babelHelpers: 'bundled',
             extensions: ['.js'],
             exclude: './node_modules/**',// 排除node_module下的所有文件
         }),
